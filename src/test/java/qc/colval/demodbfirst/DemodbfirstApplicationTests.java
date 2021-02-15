@@ -1,10 +1,10 @@
-package com.example.demo;
+package qc.colval.demodbfirst;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Cours3ApplicationTests {
+class DemodbfirstApplicationTests {
 
     @Test
     void contextLoads() {

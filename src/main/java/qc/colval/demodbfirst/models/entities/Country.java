@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package qc.colval.demodbfirst.models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -16,7 +16,7 @@ public class Country implements Serializable {
     @Id
     @Column(name = "country_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int countryId;
+    private long countryId;
 
     @Column(name = "country")
     private String country;
@@ -24,11 +24,11 @@ public class Country implements Serializable {
     @Column(name = "last_update")
     private java.sql.Timestamp lastUpdate;
 
-    public int getCountryId() {
+    public long getCountryId() {
         return this.countryId;
     }
 
-    public void setCountryId(int countryId) {
+    public void setCountryId(long countryId) {
         this.countryId = countryId;
     }
 

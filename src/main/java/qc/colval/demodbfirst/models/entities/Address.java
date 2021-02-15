@@ -1,9 +1,10 @@
-package com.example.demo.entities;
+package qc.colval.demodbfirst.models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -16,21 +17,22 @@ public class Address implements Serializable {
     @Id
     @Column(name = "address_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int addressId;
+    private long addressId;
 
     @Column(name = "address")
+    @Size(min = 2, max = 50)
     private String address;
 
     @Column(name = "address2")
+    @Size(min = 2, max = 50)
     private String address2;
 
     @Column(name = "district")
     private String district;
 
-    @Column(name = "city_id")
     @ManyToOne
     @JoinColumn(name = "city_id", referencedColumnName = "city_id")
-    private City cityId;
+    private City city;
 
     @Column(name = "postal_code")
     private String postalCode;
@@ -44,28 +46,11 @@ public class Address implements Serializable {
     @Column(name = "last_update")
     private java.sql.Timestamp lastUpdate;
 
-
-    public Address(Short addressId) {
-        this.addressId = addressId;
-    }
-
-    public Address(Short addressId, String address, String district, String phone, byte[] location, java.sql.Timestamp lastUpdate) {
-        this.addressId = addressId;
-        this.address = address;
-        this.district = district;
-        this.phone = phone;
-        this.location = location;
-        this.lastUpdate = lastUpdate;
-    }
-
-
-
-
-    public int getAddressId() {
+    public long getAddressId() {
         return this.addressId;
     }
 
-    public void setAddressId(int addressId) {
+    public void setAddressId(long addressId) {
         this.addressId = addressId;
     }
 
@@ -93,12 +78,12 @@ public class Address implements Serializable {
         this.district = district;
     }
 
-    public City getCityId() {
-        return this.cityId;
+    public City getCity() {
+        return this.city;
     }
 
-    public void setCityId(City cityId) {
-        this.cityId = cityId;
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public String getPostalCode() {

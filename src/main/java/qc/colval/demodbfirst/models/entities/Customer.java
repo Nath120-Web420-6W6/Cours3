@@ -1,14 +1,23 @@
-package com.example.demo.entities;
+package qc.colval.demodbfirst.models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "customer")
+@NamedQueries({
+        @NamedQuery(name = "Customer.findByCustomerId", query = "SELECT c FROM Customer c WHERE c.customerId = :customerId")
+        , @NamedQuery(name = "Customer.findByFirstName", query = "SELECT c FROM Customer c WHERE c.firstName = :firstName")
+        , @NamedQuery(name = "Customer.findByLastName", query = "SELECT c FROM Customer c WHERE c.lastName = :lastName")
+        , @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email")
+        , @NamedQuery(name = "Customer.findByActive", query = "SELECT c FROM Customer c WHERE c.active = :active")
+        , @NamedQuery(name = "Customer.findByCreateDate", query = "SELECT c FROM Customer c WHERE c.createDate = :createDate")
+        , @NamedQuery(name = "Customer.findByLastUpdate", query = "SELECT c FROM Customer c WHERE c.lastUpdate = :lastUpdate")
+        , @NamedQuery(name = "Customer.findAllCustomerSortedByLastName", query = "SELECT c FROM Customer c order by c.lastName asc ")
+})
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer implements Serializable {
@@ -17,28 +26,25 @@ public class Customer implements Serializable {
     @Id
     @Column(name = "customer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerId;
+    private long customerId;
 
-    @Column(name = "store_id")
-    @ManyToOne
     @JoinColumn(name = "store_id", referencedColumnName = "store_id")
-    private Store storeId;
+    @ManyToOne(optional = false)
+    private Store store;
 
     @Column(name = "first_name")
-    @Size(min = 5, max = 50)
     private String firstName;
 
     @Column(name = "last_name")
-    @Size(min = 5, max = 50)
     private String lastName;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "address_id")
+
     @ManyToOne
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
-    private Address addressId;
+    private Address address;
 
     @Column(name = "active")
     private Byte active;
@@ -51,20 +57,36 @@ public class Customer implements Serializable {
     @Basic(optional = false)
     private java.sql.Timestamp lastUpdate;
 
-    public int getCustomerId() {
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId=" + customerId +
+                ", store=" + store +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", address=" + address +
+                ", active=" + active +
+                ", createDate=" + createDate +
+                ", lastUpdate=" + lastUpdate +
+                '}';
+    }
+
+
+    public long getCustomerId() {
         return this.customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(long customerId) {
         this.customerId = customerId;
     }
 
-    public Store getStoreId() {
-        return this.storeId;
+    public Store getStore() {
+        return this.store;
     }
 
-    public void setStoreId(Store storeId) {
-        this.storeId = storeId;
+    public void setStore(Store store) {
+        this.store = store;
     }
 
     public String getFirstName() {
@@ -91,12 +113,12 @@ public class Customer implements Serializable {
         this.email = email;
     }
 
-    public Address getAddressId() {
-        return this.addressId;
+    public Address getAddress() {
+        return this.address;
     }
 
-    public void setAddressId(Address addressId) {
-        this.addressId = addressId;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Byte getActive() {
@@ -121,20 +143,5 @@ public class Customer implements Serializable {
 
     public void setLastUpdate(java.sql.Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "customerId=" + customerId +
-                ", storeId=" + storeId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", addressId=" + addressId +
-                ", active=" + active +
-                ", createDate=" + createDate +
-                ", lastUpdate=" + lastUpdate +
-                '}';
     }
 }

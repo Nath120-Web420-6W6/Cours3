@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package qc.colval.demodbfirst.models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -17,24 +17,24 @@ public class Actor implements Serializable {
     @Id
     @Column(name = "actor_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int actorId;
+    private long actorId;
 
     @Column(name = "first_name")
     @Size(min = 2, max = 50)
     private String firstName;
 
     @Column(name = "last_name")
+    @Size(min = 2, max = 50)
     private String lastName;
 
     @Column(name = "last_update")
-    @Basic(optional = false)
     private java.sql.Timestamp lastUpdate;
 
-    public int getActorId() {
+    public long getActorId() {
         return this.actorId;
     }
 
-    public void setActorId(int actorId) {
+    public void setActorId(long actorId) {
         this.actorId = actorId;
     }
 

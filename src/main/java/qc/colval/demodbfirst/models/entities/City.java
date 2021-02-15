@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package qc.colval.demodbfirst.models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -16,24 +16,24 @@ public class City implements Serializable {
     @Id
     @Column(name = "city_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cityId;
+    private long cityId;
 
     @Column(name = "city")
     private String city;
 
-    @Column(name = "country_id")
+
     @ManyToOne
     @JoinColumn(name = "country_id", referencedColumnName = "country_id")
-    private Country countryId;
+    private Country country;
 
     @Column(name = "last_update")
     private java.sql.Timestamp lastUpdate;
 
-    public int getCityId() {
+    public long getCityId() {
         return this.cityId;
     }
 
-    public void setCityId(int cityId) {
+    public void setCityId(long cityId) {
         this.cityId = cityId;
     }
 
@@ -45,12 +45,12 @@ public class City implements Serializable {
         this.city = city;
     }
 
-    public Country getCountryId() {
-        return this.countryId;
+    public Country getCountry() {
+        return this.country;
     }
 
-    public void setCountryId(Country countryId) {
-        this.countryId = countryId;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     public java.sql.Timestamp getLastUpdate() {

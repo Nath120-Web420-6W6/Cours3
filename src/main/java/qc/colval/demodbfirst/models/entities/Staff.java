@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package qc.colval.demodbfirst.models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -10,13 +10,13 @@ import java.io.Serializable;
 @Table(name = "staff")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Staff implements Serializable  {
+public class Staff implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "staff_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int staffId;
+    private long staffId;
 
     @Column(name = "first_name")
     private String firstName;
@@ -24,10 +24,10 @@ public class Staff implements Serializable  {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "address_id")
+
     @ManyToOne
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
-    private Address addressId;
+    private Address address;
 
     @Column(name = "picture")
     private byte[] picture;
@@ -36,9 +36,7 @@ public class Staff implements Serializable  {
     private String email;
 
     @Column(name = "store_id")
-    @ManyToOne
-    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
-    private Store storeId;
+    private long storeId;
 
     @Column(name = "active")
     private Byte active;
@@ -52,11 +50,11 @@ public class Staff implements Serializable  {
     @Column(name = "last_update")
     private java.sql.Timestamp lastUpdate;
 
-    public int getStaffId() {
+    public long getStaffId() {
         return this.staffId;
     }
 
-    public void setStaffId(int staffId) {
+    public void setStaffId(long staffId) {
         this.staffId = staffId;
     }
 
@@ -76,12 +74,12 @@ public class Staff implements Serializable  {
         this.lastName = lastName;
     }
 
-    public Address getAddressId() {
-        return this.addressId;
+    public Address getAddress() {
+        return this.address;
     }
 
-    public void setAddressId(Address addressId) {
-        this.addressId = addressId;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public byte[] getPicture() {
@@ -100,11 +98,11 @@ public class Staff implements Serializable  {
         this.email = email;
     }
 
-    public Store getStoreId() {
+    public long getStoreId() {
         return this.storeId;
     }
 
-    public void setStoreId(Store storeId) {
+    public void setStoreId(long storeId) {
         this.storeId = storeId;
     }
 

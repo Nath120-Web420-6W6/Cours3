@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package qc.colval.demodbfirst.models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -16,41 +16,41 @@ public class Store implements Serializable {
     @Id
     @Column(name = "store_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int storeId;
+    private long storeId;
 
-    @Column(name = "manager_staff_id")
-    private int managerStaffId;
+    @OneToOne
+    @JoinColumn(name = "manager_staff_id", referencedColumnName = "staff_id")
+    private Staff managerStaff;
 
-    @Column(name = "address_id")
     @OneToOne
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
-    private Address addressId;
+    private Address address;
 
     @Column(name = "last_update")
     private java.sql.Timestamp lastUpdate;
 
-    public int getStoreId() {
+    public long getStoreId() {
         return this.storeId;
     }
 
-    public void setStoreId(int storeId) {
+    public void setStoreId(long storeId) {
         this.storeId = storeId;
     }
 
-    public int getManagerStaffId() {
-        return this.managerStaffId;
+    public Staff getManagerStaff() {
+        return this.managerStaff;
     }
 
-    public void setManagerStaffId(int managerStaffId) {
-        this.managerStaffId = managerStaffId;
+    public void setManagerStaff(Staff managerStaff) {
+        this.managerStaff = managerStaff;
     }
 
-    public Address getAddressId() {
-        return this.addressId;
+    public Address getAddress() {
+        return this.address;
     }
 
-    public void setAddressId(Address addressId) {
-        this.addressId = addressId;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public java.sql.Timestamp getLastUpdate() {
